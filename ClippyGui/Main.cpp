@@ -1,15 +1,20 @@
+
 #include "pch.h"
-#include "stdafx.h"
-
+#include <windows.h>
+#include <iostream>
+#include <winuser.h>
+#include <winbase.h>
+#include <chrono>
+#include <ctime> 
+#include <string> 
 using namespace std;
-
-//This is a GUI based version of my previous clippy project
 
 void clippy();
 
 int main()
 {
 	clippy();
+	return 0;
 }
 
 void clippy()
@@ -43,6 +48,7 @@ void clippy()
 	cout << currentTime;
 
 	//Prints updated clipboard
+
 	cout << " - Clipboard updated: " + copy + " \n" << endl;
 
 	//Loop and check if copy and compare are the same
