@@ -4,6 +4,7 @@
 #include "stdafx.h"
 #include "ClipboardGUI.h"
 
+
 #define MAX_LOADSTRING 100
 
 // Global Variables:
@@ -97,8 +98,18 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 {
    hInst = hInstance; // Store instance handle in our global variable
 
-   HWND hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
-      CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, nullptr, nullptr, hInstance, nullptr);
+   HWND hWnd = CreateWindow(
+	   szWindowClass,
+	   szTitle,
+	   WS_OVERLAPPEDWINDOW,
+	   CW_USEDEFAULT, 
+	   CW_USEDEFAULT,
+	   500, 400,
+	   NULL,
+	   NULL,
+	   hInstance,
+	   NULL
+   );
 
    if (!hWnd)
    {
@@ -123,6 +134,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 //
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
+	TCHAR greeting[] = _T("ClippyBoard - C++ Clipboard Manager");
     switch (message)
     {
     case WM_COMMAND:
@@ -146,7 +158,9 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         {
             PAINTSTRUCT ps;
             HDC hdc = BeginPaint(hWnd, &ps);
-            // TODO: Add any drawing code that uses hdc here...
+            
+			TextOut(hdc, 5, 5, greeting, _tcslen(greeting));
+
             EndPaint(hWnd, &ps);
         }
         break;
