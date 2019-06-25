@@ -9,23 +9,24 @@ namespace ClippyGui {
 	using namespace System::Data;
 	using namespace System::Drawing;
 
-	void send() {
-
-	}
-
-
-	/// <summary>
-	/// Summary for MyForm
-	/// </summary>
 	public ref class MyForm : public System::Windows::Forms::Form
 	{
+
+
 	public:
 		MyForm(void)
 		{
 			InitializeComponent();
-			//
-			//TODO: Add the constructor code here
-			//
+		}
+
+		//Class to input data into dataGridView
+		//Need to call this and pass (Time, Copy)
+		void sent(String ^ time, String ^ copy) 
+		{
+			Text = "hello";
+			this->dataGridView1->Rows->Add(Text, Text);
+			this->label3->Text = copy;
+			return;
 		}
 
 	protected:
@@ -42,7 +43,13 @@ namespace ClippyGui {
 	private: System::Windows::Forms::Label^  label1;
 	private: System::Windows::Forms::Label^  label2;
 	private: System::Windows::Forms::GroupBox^  groupBox1;
-	private: System::Windows::Forms::TableLayoutPanel^  tableLayoutPanel1;
+	private: System::Windows::Forms::DataGridView^  dataGridView1;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^  Time;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^  Clipboard;
+	private: System::Windows::Forms::Label^  label3;
+
+
+
 	protected:
 
 	private:
@@ -56,13 +63,18 @@ namespace ClippyGui {
 		/// Required method for Designer support - do not modify
 		/// the contents of this method with the code editor.
 		/// </summary>
+
 		void InitializeComponent(void)
 		{
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->groupBox1 = (gcnew System::Windows::Forms::GroupBox());
-			this->tableLayoutPanel1 = (gcnew System::Windows::Forms::TableLayoutPanel());
+			this->dataGridView1 = (gcnew System::Windows::Forms::DataGridView());
+			this->Time = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Clipboard = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->label3 = (gcnew System::Windows::Forms::Label());
 			this->groupBox1->SuspendLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// label1
@@ -87,7 +99,8 @@ namespace ClippyGui {
 			// 
 			// groupBox1
 			// 
-			this->groupBox1->Controls->Add(this->tableLayoutPanel1);
+			this->groupBox1->Controls->Add(this->label3);
+			this->groupBox1->Controls->Add(this->dataGridView1);
 			this->groupBox1->Location = System::Drawing::Point(15, 12);
 			this->groupBox1->Name = L"groupBox1";
 			this->groupBox1->Size = System::Drawing::Size(570, 228);
@@ -96,35 +109,54 @@ namespace ClippyGui {
 			this->groupBox1->Text = L"Copys";
 			this->groupBox1->Enter += gcnew System::EventHandler(this, &MyForm::groupBox1_Enter);
 			// 
-			// tableLayoutPanel1
+			// dataGridView1
 			// 
-			this->tableLayoutPanel1->AutoSize = true;
-			this->tableLayoutPanel1->CellBorderStyle = System::Windows::Forms::TableLayoutPanelCellBorderStyle::Single;
-			this->tableLayoutPanel1->ColumnCount = 2;
-			this->tableLayoutPanel1->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent,
-				17.38351F)));
-			this->tableLayoutPanel1->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent,
-				82.61649F)));
-			this->tableLayoutPanel1->Location = System::Drawing::Point(6, 19);
-			this->tableLayoutPanel1->Name = L"tableLayoutPanel1";
-			this->tableLayoutPanel1->RowCount = 1;
-			this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 100)));
-			this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 20)));
-			this->tableLayoutPanel1->Size = System::Drawing::Size(558, 17);
-			this->tableLayoutPanel1->TabIndex = 0;
+			this->dataGridView1->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
+			this->dataGridView1->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(2) { this->Time, this->Clipboard });
+			this->dataGridView1->Location = System::Drawing::Point(0, 19);
+			this->dataGridView1->Name = L"dataGridView1";
+			this->dataGridView1->Size = System::Drawing::Size(570, 203);
+			this->dataGridView1->TabIndex = 0;
+			this->dataGridView1->CellContentClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &MyForm::dataGridView1_CellContentClick);
+			// 
+			// Time
+			// 
+			this->Time->HeaderText = L"Time";
+			this->Time->Name = L"Time";
+			this->Time->ReadOnly = true;
+			this->Time->Resizable = System::Windows::Forms::DataGridViewTriState::False;
+			// 
+			// Clipboard
+			// 
+			this->Clipboard->HeaderText = L"Clipboard";
+			this->Clipboard->Name = L"Clipboard";
+			this->Clipboard->ReadOnly = true;
+			this->Clipboard->Width = 427;
+			// 
+			// label3
+			// 
+			this->label3->AutoSize = true;
+			this->label3->Location = System::Drawing::Point(228, -3);
+			this->label3->Name = L"label3";
+			this->label3->Size = System::Drawing::Size(35, 13);
+			this->label3->TabIndex = 1;
+			this->label3->Text = L"label3";
 			// 
 			// MyForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
+			this->AutoSize = true;
 			this->ClientSize = System::Drawing::Size(597, 265);
 			this->Controls->Add(this->groupBox1);
 			this->Controls->Add(this->label2);
 			this->Controls->Add(this->label1);
+			this->Cursor = System::Windows::Forms::Cursors::Default;
 			this->Name = L"MyForm";
 			this->Text = L"ClippyBoard";
 			this->groupBox1->ResumeLayout(false);
 			this->groupBox1->PerformLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
@@ -134,5 +166,7 @@ namespace ClippyGui {
 	}
 	private: System::Void groupBox1_Enter(System::Object^  sender, System::EventArgs^  e) {
 	}
-	};
+	private: System::Void dataGridView1_CellContentClick(System::Object^  sender, System::Windows::Forms::DataGridViewCellEventArgs^  e) {
+	}
+};
 }

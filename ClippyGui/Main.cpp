@@ -7,7 +7,9 @@
 #include <chrono>
 #include <ctime> 
 #include <string> 
+#include "Gui.h"
 using namespace std;
+using namespace ClippyGui;
 
 void clippy();
 
@@ -48,6 +50,9 @@ void clippy()
 	cout << currentTime;
 
 	//Prints updated clipboard
+	//sent(currentTime,copy)
+
+	//ClippyGui::MyForm sent();
 
 	cout << " - Clipboard updated: " + copy + " \n" << endl;
 
