@@ -3,6 +3,8 @@
 
 using namespace std;
 
+//This is a GUI based version of my previous clippy project
+
 void clippy();
 
 int main()
