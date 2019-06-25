@@ -8,15 +8,17 @@
 #include <ctime> 
 #include <string> 
 #include "Gui.h"
+
 using namespace std;
 using namespace ClippyGui;
+using namespace System;
 
 void clippy();
 
-int main()
+void main()
 {
 	clippy();
-	return 0;
+	return;
 }
 
 void clippy()
@@ -44,15 +46,16 @@ void clippy()
 	struct tm time_info;
 
 	//Formats the time
-	if (localtime_s(&time_info, &a) == 0) strftime(currentTime, sizeof(currentTime), "%H:%M:%S", &time_info);
+		if (localtime_s(&time_info, &a) == 0) strftime(currentTime, sizeof(currentTime), "%H:%M:%S", &time_info);
 
 	//Prints current time
-	cout << currentTime;
+		cout << currentTime;
 
+	String^ systemCopy = gcnew String(copy.c_str());
+	
 	//Prints updated clipboard
-	//sent(currentTime,copy)
-
-	//ClippyGui::MyForm sent();
+	//Cant pass to a non static ref class, cant create object because not static.
+	//ClippyGui::MyForm::sent(systemCopy, systemCopy);
 
 	cout << " - Clipboard updated: " + copy + " \n" << endl;
 

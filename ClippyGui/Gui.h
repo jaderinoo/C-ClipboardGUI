@@ -1,7 +1,7 @@
 #pragma once
+#include "Main.h";
 
 namespace ClippyGui {
-
 	using namespace System;
 	using namespace System::ComponentModel;
 	using namespace System::Collections;
@@ -12,19 +12,21 @@ namespace ClippyGui {
 	public ref class MyForm : public System::Windows::Forms::Form
 	{
 
-
 	public:
 		MyForm(void)
 		{
 			InitializeComponent();
+			//Fix this 
+			main();
 		}
 
 		//Class to input data into dataGridView
+
 		//Need to call this and pass (Time, Copy)
-		void sent(String ^ time, String ^ copy) 
+		void sent(String ^ copy, String ^ copy2)
 		{
-			Text = "hello";
-			this->dataGridView1->Rows->Add(Text, Text);
+
+			this->dataGridView1->Rows->Add(copy, copy2);
 			this->label3->Text = copy;
 			return;
 		}
