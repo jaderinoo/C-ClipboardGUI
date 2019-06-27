@@ -55,7 +55,7 @@ void clippy()
 	
 	//Prints updated clipboard
 	//Cant pass to a non static ref class, cant create object because not static.
-	//ClippyGui::MyForm::sent(systemCopy, systemCopy);
+	ClippyGui::MyForm::sent(systemCopy, systemCopy);
 
 	cout << " - Clipboard updated: " + copy + " \n" << endl;
 
